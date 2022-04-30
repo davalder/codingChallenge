@@ -13,6 +13,23 @@
             <input type="text" class="input">
             <button class="button" style="width: auto; height: 20px;" >Is this sequence correct?</button>
         </div>
+        <div>
+            <p>Given a string sequence consisting of the characters '(', ')', '[', ']', '{', and '}'.<br>
+                Your task is to determine whether or not the sequence is a valid bracket sequence.<br>
+                The Valid bracket sequence is defined in the following way:<br>
+                <br>
+                An empty bracket sequence is a valid bracket sequence.<br>
+                If S is a valid bracket sequence then (S), [S] and {S} are also valid.<br>
+                If A and B are valid bracket sequences then AB is also valid.<br>
+                <br>
+                For example for the next escenario:<br>
+                sequence = "({[]})({[]})";<br>
+                solution(sequence); // This should be true<br>
+                sequence = "({[]}";<br>
+                solution(sequence); // This should be false<br>
+                sequence = "({]})";<br>
+                solution(sequence); // This should be false</p>
+        </div>
     </main>
     <script src="./index.js"></script>
 </body>

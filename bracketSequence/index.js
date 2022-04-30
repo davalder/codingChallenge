@@ -93,13 +93,13 @@ const eventClick = () => {
     if (!document.querySelector('.out')) {
         let response = document.createElement('p');
         response.className = 'out'
-        response.textContent = `This sequence is ${rest}`
+        response.textContent = `This sequence "${data.value}" is ${rest}`
 
         let container = document.querySelector('.container')
         container.appendChild(response);
     } else {
         let response = document.querySelector('.out');
-        response.textContent = `This sequence is ${rest}`
+        response.textContent = `This sequence "${data.value}" is ${rest}`
     }
 
     console.log(rest)
