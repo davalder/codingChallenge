@@ -7,45 +7,73 @@ const sequence = (data) => {
         return false;
     }
 
-    let arrayHalf = array.length / 2;
-
-    let arrayFirstHalf = array.slice(0, arrayHalf);
-    let arraySecondHalf = array.slice(arrayHalf, array.length);
-
-    let compare = (array1, array2) => {
-        console.log('on function',  array1)
-        if (array1[array1.length -1] === '('){
-            if (array2[0] === ')') {
-                console.log(array1)
-                array1.pop();
-                array2.shift();
-                console.log(array1)
-                if (array1.length) {
-                    return compare(array1, array2);
+    let compare = (array) => {
+        if (array[0] === '('){
+            if (array[array.length - 1] === ')') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
                 } else {
                     return true;
                 }
             } else {
                 return false;
             }
-        } else if (array1[array1.length - 1] === '[') {
-            if (array2[0] === ']') {
-                array1.pop();
-                array2.shift();
-                if (array1.length) {
-                    return compare(array1, array2);
+        } else if (array[0] === ')') {
+            if (array[array.length - 1] === '(') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
                 } else {
                     return true;
                 }
             } else {
                 return false;
             }
-        } else if (array1[array1.length - 1] === '{') {
-            if (array2[0] === '}') {
-                array1.pop();
-                array2.shift();
-                if (array1.length) {
-                    return compare(array1, array2);
+        } else if (array[0] === '[') {
+            if (array[array.length - 1] === ']') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } else if (array[0] === ']') {
+            if (array[array.length - 1] === '[') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } else if (array[0] === '{') {
+            if (array[array.length - 1] === '}') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
+                } else {
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } else if (array[0] === '}') {
+            if (array[array.length - 1] === '{') {
+                array.pop();
+                array.shift();
+                if (array.length) {
+                    return compare(array);
                 } else {
                     return true;
                 }
@@ -56,22 +84,23 @@ const sequence = (data) => {
             return false;
         }
     }
-
-    console.log(arrayFirstHalf);
-    console.log(arraySecondHalf);
-
-    return compare(arrayFirstHalf, arraySecondHalf)
+    return compare(array)
 };
 
 const eventClick = () => {
     let rest = sequence(data.value);
 
-    let response = document.createElement('p');
-    response.className = 'out'
-    response.textContent = rest
+    if (!document.querySelector('.out')) {
+        let response = document.createElement('p');
+        response.className = 'out'
+        response.textContent = `This sequence is ${rest}`
 
-    let container = document.querySelector('.container')
-    container.appendChild(response);
+        let container = document.querySelector('.container')
+        container.appendChild(response);
+    } else {
+        let response = document.querySelector('.out');
+        response.textContent = `This sequence is ${rest}`
+    }
 
     console.log(rest)
 }
