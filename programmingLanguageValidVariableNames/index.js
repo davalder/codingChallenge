@@ -4,21 +4,46 @@ const buttonValidation = document.querySelector('.button');
 const arrayWords = ['is', 'valid', 'right'];
 
 const solution = (data, words) => {
-    // let arrayData = data.split(/[A-Z]/)
-    // return arrayData
-   
-    let arrayData = data.map(item => {
+    let array = [];
+    let word
+    for (let i = 0; data.length > i; i++) {
+        console.log(`entro al ciclo con ${data[i]}`)
 
-        let buildWord = (letter) => {
-            let word;
-            if (letter === /[A-Z]/) {
-                word = word + ',';
+        if (data[i].match(/[A-Z]/) && array.length === 0){
+            return false;
+        } else if (!data[i].match(/[A-Z]/)) {
+            console.log('paso2')
+            if (!word) {
+                word = data[i];
+            } else {
+                word = word + data[i];
+                if (data[i + 1]) {
+                    if (data[i + 1].match(/[A-Z]/)) {
+                        array.push(word)
+                        word = '';
+                    }
+                } else if (!data[i + 1] && !array.length) {
+                    return false
+                } else if (!data[i + 1]) {
+                    array.push(word)
+                    word = '';
+                }
+            }
+        } else if (data[i].match(/[A-Z]/)) {
+            console.log('paso3')
+            word = word + data[i];
+            if (!data[i + 1]) {
+                array.push(word)
+                word = '';
             }
         }
-        return buildWord(item);
-        })
+    }
 
-    return arrayData;
+    array = array.map(item => item.toLowerCase());
+    console.log(array);
+    let falseAndTrue = array.map(item => words.some(element => element === item));
+
+    return falseAndTrue.every(item => item === true);
 };
 
 const eventClick = () => {
